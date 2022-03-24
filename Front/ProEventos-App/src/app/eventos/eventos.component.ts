@@ -13,16 +13,16 @@ export class EventosComponent implements OnInit {
   widthImg: number = 125;
   marginImg: number = 2;
   exibirImagem: boolean = true;
-  private _filtroLista: string = '';
+  public _filtroLista: string = '';
 
 
-  public get filtrosLista(): string {
+  public get filtroLista(): string {
     return this._filtroLista;
   }
 
   public set filtroListra(value: string) {
     this._filtroLista = value;
-    this.eventosFiltrados = this.filtrosLista ? this.filtrarEventos(this.filtrosLista) : this.eventos;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
   filtrarEventos(filtrarPor: string): any {
@@ -33,7 +33,9 @@ export class EventosComponent implements OnInit {
     )
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   ngOnInit(): void {
     this.getEventos();
