@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProEventos.Domain
 {
@@ -8,6 +9,9 @@ namespace ProEventos.Domain
         public int Id {get; set;}
         public string Local {get; set;}
         public DateTime? DataEvento {get; set;}
+        
+        [Required]
+        [MaxLength(40)]
         public string Tema {get; set;}
         public int QtdPessoas {get; set;}
         public string ImagemURL {get; set;}
