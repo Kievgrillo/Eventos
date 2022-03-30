@@ -58,15 +58,15 @@
       <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td class="d-none d-md-table-cell">{{evento.local}}</td>
-      <td>{{evento.dataEvento | DateFormatPipe}}</td>
+      <td>{{evento.dataEvento}}</td>
       <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
-      <td class="d-none d-md-table-cell">{{evento.lotes[0].nome | uppercase}}</td>
+      <td class="d-none d-md-table-cell">{{evento.lotes[0]?.nome | uppercase}}</td>
       <td>
         <button type="button" class="btn btn-primary btn-sm mr-1" tooltip="Editar"
         (click)="detalheEvento(evento.id)" style="cursor: pointer;">
           <i class="fa fa-edit"></i>
         </button>
-        <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)" >
+        <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template, evento.id)" >
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -88,7 +88,7 @@
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Tem certeza que quer deletar o evento?</p>
+    <p>Tem certeza que quer deletar o evento de código {{this.eventoId}}?</p>
     <button type="button" class="btn btn-default" (click)="confirm()" >sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
   </div>
