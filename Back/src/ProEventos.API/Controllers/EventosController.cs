@@ -26,7 +26,7 @@ namespace ProEventos.API.Controllers
             {
                 var eventos = await _eventoService.GetAllEventosAsync(true);
                 if (eventos == null) return NoContent();
-                
+
                 return Ok(eventos);
             }
             catch (Exception ex)
@@ -73,7 +73,7 @@ namespace ProEventos.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(EventoDto model)
         {
-             try
+            try
             {
                 var evento = await _eventoService.AddEventos(model);
                 if (evento == null) return NoContent();
@@ -90,7 +90,7 @@ namespace ProEventos.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, EventoDto model)
         {
-             try
+            try
             {
                 var evento = await _eventoService.UpdateEvento(id, model);
                 if (evento == null) return NoContent();
@@ -107,13 +107,15 @@ namespace ProEventos.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-             try
+            try
             {
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
                 if (evento == null) return NoContent();
 
+               
+
                 return await _eventoService.DeleteEvento(id) 
-                     ? Ok (new { message = "Deletado" }) 
+                     ? Ok(new { message = "Deletado" }) 
                      : throw new Exception("Ocorreu um problema não específico ao tentar deletar Evento.");
             }
             catch (Exception ex)

@@ -14,32 +14,31 @@ import { EventoService } from 'src/app/services/evento.service';
 export class EventoListaComponent implements OnInit {
 
   public modalRef: BsModalRef;
-  public eventosFiltrados: Evento[] = [];
+  public eventosFiltrados: any = [];
   public eventos: Evento[] = [];
   public eventoId = 0;
 
   public widthImg: number = 125;
   public marginImg: number = 2;
   public exibirImagem: boolean = true;
-  public _filtroLista: string = '';
+  private filtroListado = '';
 
 
   public get filtroLista(): string {
-    return this._filtroLista;
+    return this.filtroListado;
   }
-
-  public set filtroListra(value: string) {
-    this._filtroLista = value;
+  public set filtroLista(value: string) {
+    this.filtroListado = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
-
   public filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
       evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
       evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
-    )
+    );
   }
+
 
   constructor(
     private eventoService: EventoService,
@@ -53,25 +52,41 @@ export class EventoListaComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.carregarEventos();
+    this.CarregarEventos();
   }
 
   public alterarImagem(): void {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public carregarEventos(): void {
+  // public carregarEventos(): void {
+  //   this.eventoService.getEventos().subscribe({
+  //     next: (eventos: Evento[]) => {
+  //       this.eventos = eventos;
+  //       this.eventosFiltrados = this.eventos;
+  //     },
+  //    error:(error: any) => {
+  //      this.spinner.hide();
+  //      this.toastr.error('Erro ao carregar os Eventos', 'Error!');
+  //    },
+  //    complete: () => this.spinner.hide()
+  //   });
+  // }
+
+  public CarregarEventos(): void {
     this.eventoService.getEventos().subscribe({
       next: (eventos: Evento[]) => {
         this.eventos = eventos;
         this.eventosFiltrados = this.eventos;
       },
-     error:(error: any) => {
-       this.spinner.hide();
-       this.toastr.error('Erro ao carregar os Eventos', 'Error!');
-     },
-     complete: () => this.spinner.hide()
+
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao carregar os Eventos', 'Erro');
+      },
+      complete: () => this.spinner.hide()
     });
+
   }
 
   openModal(template: TemplateRef<any>, eventoId: number): void {
@@ -81,14 +96,15 @@ export class EventoListaComponent implements OnInit {
 
   confirm(): void {
     this.modalRef.hide();
+    this.toastr.success('O Evento foi deletado com Sucesso.', 'Deletado!');
     this.spinner.show();
 
-    this.eventoService.DeleteEvento(this.eventoId).subscribe(
+    this.eventoService.deleteEvento(this.eventoId).subscribe(
       (result: any) => {
-        if (result.message === 'Deletado') {
+         if (result.message === 'Deletado'){
           this.toastr.success('O Evento foi deletado com Sucesso.', 'Deletado!');
-          this.carregarEventos();
-        }
+          this.CarregarEventos();
+         }
       },
       (error: any) => {
         console.error(error);

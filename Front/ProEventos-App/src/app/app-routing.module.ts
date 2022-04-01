@@ -29,6 +29,9 @@ const routes: Routes = [
   { path: 'user/perfil', component: PerfilComponent},
 
   { path: 'eventos', redirectTo: 'evento/lista'},
+
+  { path: 'salvar-eventos', redirectTo: 'evento/lista'},
+
   {
     path: 'eventos', component: EventosComponent,
     children: [

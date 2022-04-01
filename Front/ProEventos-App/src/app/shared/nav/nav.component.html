@@ -3,7 +3,8 @@
     <a class="navbar-brand" routerLink="dashboard">
       <i class="fa fa-users mb-2"></i>
     </a>
-    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true" id="navbarNav">
@@ -26,11 +27,11 @@
           </a>
           <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" routerLink="user/perfil">
-              Perfil
+            Perfil
             </a>
             <div role="separator" class="divider"></div>
             <a class="dropdown-item" routerLink="user/login">
-              Sair
+            Sair
             </a>
           </div>
         </li>

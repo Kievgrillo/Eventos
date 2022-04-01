@@ -8,6 +8,7 @@ import { take } from 'rxjs/operators';
   //{ providedIn: 'root' }
 )
 export class EventoService {
+
   baseURL = 'https://localhost:5001/api/eventos';
 
   constructor(private http: HttpClient) { }
@@ -32,7 +33,7 @@ export class EventoService {
     return this.http.put<Evento>(`${this.baseURL}/${id}`, evento).pipe(take(1));
   }
 
-  public DeleteEvento(id: number): Observable<any> {
+  public deleteEvento(id: number): Observable<any> {
     return this.http.delete(`${this.baseURL}/${id}`).pipe(take(1));
   }
 }
