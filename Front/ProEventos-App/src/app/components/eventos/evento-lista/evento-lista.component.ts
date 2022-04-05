@@ -63,7 +63,7 @@ export class EventoListaComponent implements OnInit {
   public mostraImagem(imagemURL: string): string {
     return (imagemURL !== '')
       ? `${environment.apiURL}Resources/Images/${imagemURL}`
-      : 'assets/semimagem.jpeg';
+      : 'assets/semmagem.jpeg';
   }
 
   public CarregarEventos(): void {
