@@ -43,18 +43,17 @@
       <th class="d-none d-md-table-cell">Local</th>
       <th>Data</th>
       <th class="d-none d-md-table-cell">Qtd Pessoas</th>
-      <!-- <th class="d-none d-md-table-cell">Lote</th> -->
       <th>Opções</th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventosFiltrados">
 
-      <!-- método imagem -->
+
       <td>
         <img [collapse]="!exibirImagem"
         [isAnimated]="true"
-        src="/assets/{{evento.imagemURL}}"
+        [src]="mostraImagem(evento.imagemURL)"
         [style.width.px]="widthImg"
         [style.margin.px]="marginImg"
         >
@@ -65,7 +64,6 @@
       <td class="d-none d-md-table-cell">{{evento.local}}</td>
       <td>{{evento.dataEvento}}</td>
       <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
-      <!-- <td class="d-none d-md-table-cell">{{evento.lotes[0]?.nome | uppercase}}</td> -->
       <td>
         <button type="button" class="btn btn-primary btn-sm mr-1" tooltip="Editar"
         (click)="detalheEvento(evento.id)" style="cursor: pointer;">

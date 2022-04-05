@@ -5,11 +5,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/models/Evento';
 import { EventoService } from 'src/app/services/evento.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
   templateUrl: './evento-lista.component.html',
-  styleUrls: ['./evento-lista.component.scss']
+  styleUrls: ['./evento-lista.component.scss'],
 })
 export class EventoListaComponent implements OnInit {
 
@@ -59,19 +60,11 @@ export class EventoListaComponent implements OnInit {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  // public carregarEventos(): void {
-  //   this.eventoService.getEventos().subscribe({
-  //     next: (eventos: Evento[]) => {
-  //       this.eventos = eventos;
-  //       this.eventosFiltrados = this.eventos;
-  //     },
-  //    error:(error: any) => {
-  //      this.spinner.hide();
-  //      this.toastr.error('Erro ao carregar os Eventos', 'Error!');
-  //    },
-  //    complete: () => this.spinner.hide()
-  //   });
-  // }
+  public mostraImagem(imagemURL: string): string {
+    return (imagemURL !== '')
+      ? `${environment.apiURL}Resources/Images/${imagemURL}`
+      : 'assets/semimagem.jpeg';
+  }
 
   public CarregarEventos(): void {
     this.eventoService.getEventos().subscribe({
@@ -84,7 +77,7 @@ export class EventoListaComponent implements OnInit {
         this.spinner.hide();
         this.toastr.error('Erro ao carregar os Eventos', 'Erro');
       },
-      complete: () => this.spinner.hide()
+      complete: () => this.spinner.hide(),
     });
 
   }
