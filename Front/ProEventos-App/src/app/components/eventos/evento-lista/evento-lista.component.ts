@@ -18,7 +18,6 @@ export class EventoListaComponent implements OnInit {
   public eventosFiltrados: any = [];
   public eventos: Evento[] = [];
   public eventoId = 0;
-
   public widthImg: number = 125;
   public marginImg: number = 2;
   public exibirImagem: boolean = true;
@@ -28,10 +27,12 @@ export class EventoListaComponent implements OnInit {
   public get filtroLista(): string {
     return this.filtroListado;
   }
+
   public set filtroLista(value: string) {
     this.filtroListado = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
+
   public filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
@@ -40,7 +41,6 @@ export class EventoListaComponent implements OnInit {
     );
   }
 
-
   constructor(
     private eventoService: EventoService,
     private modalService: BsModalService,
@@ -48,7 +48,6 @@ export class EventoListaComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router
     ) {
-
   }
 
   public ngOnInit(): void {
@@ -72,14 +71,12 @@ export class EventoListaComponent implements OnInit {
         this.eventos = eventos;
         this.eventosFiltrados = this.eventos;
       },
-
       error: (error: any) => {
         this.spinner.hide();
         this.toastr.error('Erro ao carregar os Eventos', 'Erro');
       },
       complete: () => this.spinner.hide(),
     });
-
   }
 
   openModal(template: TemplateRef<any>, eventoId: number): void {
@@ -109,6 +106,7 @@ export class EventoListaComponent implements OnInit {
   decline(): void {
     this.modalRef.hide();
   }
+
   detalheEvento(id: number): void{
     this.router.navigate([`eventos/detalhe/${id}`]);
   }

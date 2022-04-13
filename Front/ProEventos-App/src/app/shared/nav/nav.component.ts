@@ -18,5 +18,4 @@ export class NavComponent implements OnInit {
   showMenu(): boolean {
     return this.Router.url != '/user/login';
   }
-
 }
